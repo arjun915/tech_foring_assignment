@@ -18,6 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
 
+from api.views import ProjectViewSet, TaskViewSet, CommentViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'projects', ProjectViewSet)
+router.register(r'projects/(?P<project_id>\d+)/tasks', TaskViewSet)
+router.register(r'tasks/(?P<task_id>\d+)/comments', CommentViewSet)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('api.urls'))

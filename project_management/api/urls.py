@@ -8,12 +8,12 @@ from . import views
 # router.register(r'project-members', ProjectMemberViewSet)
 # router.register(r'tasks', TaskViewSet)
 # router.register(r'comments', CommentViewSet)
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
-    # path('api/users/register/', views.user_view, name='user-register'),  # POST for registration
-    # path('api/users/login/', views.user_view, name='user-login'),        # POST for login
+    path('api/users/register/', views.RegisterUserView.as_view(), name='user-register'),
+    path('api/users/login/', views.LoginUserView.as_view(), name='user-login'),
     path('api/users/<int:pk>/', views.user_view, name='user-detail'),
-
 
     # Project Endpoints
     path('api/projects/', views.project_view, name='project-list-create'),
@@ -26,14 +26,9 @@ urlpatterns = [
     # Comment Endpoints
     path('api/tasks/<int:task_id>/comments/', views.comment_view, name='comment-list-create'),
     path('api/comments/<int:pk>/', views.comment_update_delete_view, name='comment-detail-update-delete'),
-    path('api/users/register/', views.RegisterUserView.as_view(), name='user-register'),
-    path('api/users/login/', views.LoginUserView.as_view(), name='user-login'),
-    # path('api/users/<int:pk>/', views.UserDetailView.as_view(), name='user-detail'),
-    # path('api/projects/', ProjectViewSet.as_view({'get': 'list', 'post': 'create'}), name='project-list-create'),
-    # path('api/projects/<int:pk>/', ProjectViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='project-detail-update-delete'),
-    # path('api/projects/<int:project_id>/tasks/', TaskViewSet.as_view({'get': 'list', 'post': 'create'}), name='task-list-create'),
-    # path('api/tasks/<int:pk>/', TaskViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='task-detail-update-delete'),
-    # path('api/tasks/<int:task_id>/comments/', CommentViewSet.as_view({'get': 'list', 'post': 'create'}), name='comment-list-create'),
-    # path('api/comments/<int:pk>/', CommentViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='comment-detail-update-delete'),
+  
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
 
 ]
