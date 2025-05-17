@@ -1,6 +1,3 @@
-# tech_foring_assignment
-# Project Name
-
 ## Overview
 
 This is a Django-based API project for managing **projects**, **tasks**, and **comments**. It provides endpoints to create, retrieve, update, and delete projects, tasks, and comments, along with JWT-based authentication for secure access.
